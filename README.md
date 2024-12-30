@@ -21,13 +21,14 @@ Ce projet est une application Flask pour la gestion des clubs sportifs et des co
     python3 -m venv venv
 
 3. Activez l'environnement virtuel :
-    Sur MacOS/Linux :
-        ```bash
-        source venv/bin/activate
 
-    Sur Windows :
-        ```bash
-        .\venv\Scripts\activate
+Sur MacOS/Linux :
+    ```bash
+    source venv/bin/activate
+
+Sur Windows :
+    ```bash
+    .\venv\Scripts\activate
 
 4. Installez les dépendances :
     ```bash
@@ -48,8 +49,8 @@ Assurez-vous que les fichiers clubs.json et competitions.json sont présents dan
 
 
 ### Routes principales
-/ : Page d'accueil (Index)
-/showSummary : Affiche un résumé du club et des compétitions
-/book/<competition>/<club> : Permet de réserver des places pour une compétition
-/purchasePlaces : Confirme la réservation des places pour une compétition
+/ : Page d'accueil (Index)  
+/showSummary : Affiche un résumé du club et des compétitions  
+/book/<competition>/<club> : Permet de réserver des places pour une compétition  
+/purchasePlaces : Confirme la réservation des places pour une compétition  
 /logout : Permet à l'utilisateur de se déconnecter
