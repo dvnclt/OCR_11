@@ -2,22 +2,6 @@
 
 Ce projet est une application Flask pour la gestion des clubs sportifs et des compétitions. L'application permet aux utilisateurs de consulter les compétitions disponibles, réserver des places et afficher des informations sur les clubs.
 
-## Structure du projet
-
-Voici la structure des dossiers du projet :
-
-OCR_P11/ │
- ├── gudlift/ 
- │  ├── init.py # Initialise l'application Flask 
- │  ├── routes.py # Contient l'ensemble des routes
- │  ├── utils.py # Contient les fonctions utilitaires comme loadClubs() et loadCompetitions() 
- │  └── templates/ # Contient les templates HTML
- │      ├── index.html 
- │      ├── welcome.html 
- │      └── booking.html 
- ├── config.py # Contient la configuration de l'application 
- └── run.py # Point d'entrée pour lancer l'application
-
 ## Installation
 
 ### Prérequis
