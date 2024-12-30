@@ -1,51 +1,71 @@
-# gudlift-registration
+# OCR P11 - Gudlift
 
-1. Why
+Ce projet est une application Flask pour la gestion des clubs sportifs et des compétitions. L'application permet aux utilisateurs de consulter les compétitions disponibles, réserver des places et afficher des informations sur les clubs.
+
+## Structure du projet
+
+Voici la structure des dossiers du projet :
+
+OCR_P11/ │
+ ├── gudlift/ 
+ │  ├── init.py # Initialise l'application Flask 
+ │  ├── routes.py # Contient l'ensemble des routes
+ │  ├── utils.py # Contient les fonctions utilitaires comme loadClubs() et loadCompetitions() 
+ │  └── templates/ # Contient les templates HTML
+ │      ├── index.html 
+ │      ├── welcome.html 
+ │      └── booking.html 
+ ├── config.py # Contient la configuration de l'application 
+ └── run.py # Point d'entrée pour lancer l'application
+
+## Installation
+
+### Prérequis
+
+- Python 3.x
+- pip (gestionnaire de paquets Python)
+
+### Étapes d'installation
+
+1. Clonez ce repository :
+   ```bash
+   git clone https://github.com/votre-utilisateur/OCR_P11.git
+   cd OCR_P11
+
+2. Créez un environnement virtuel :
+    ```bash
+    python3 -m venv venv
+
+3. Activez l'environnement virtuel :
+    Sur MacOS/Linux :
+        ```bash
+        source venv/bin/activate
+
+    Sur Windows :
+        ```bash
+        .\venv\Scripts\activate
+
+4. Installez les dépendances :
+    ```bash
+    pip install -r requirements.txt
 
 
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
+### Fichiers JSON
 
-2. Getting Started
+Assurez-vous que les fichiers clubs.json et competitions.json sont présents dans le répertoire racine du projet ou ajustez les chemins dans le code pour pointer vers leur emplacement correct.
 
-    This project uses the following technologies:
+## Lancer l'application
 
-    * Python v3.x+
+1. Pour démarrer l'application, utilisez le fichier run.py :
+    ```bash
+    python run.py
 
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
-     
-
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
-
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
-
-        Before you begin, please ensure you have this installed globally. 
+2. L'application sera disponible à l'adresse http://127.0.0.1:5000/.
 
 
-3. Installation
-
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
-
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
-
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
-
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
-
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
-
-4. Current Setup
-
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-     
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
-
-5. Testing
-
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
-
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
-
+### Routes principales
+/ : Page d'accueil (Index)
+/showSummary : Affiche un résumé du club et des compétitions
+/book/<competition>/<club> : Permet de réserver des places pour une compétition
+/purchasePlaces : Confirme la réservation des places pour une compétition
+/logout : Permet à l'utilisateur de se déconnecter
