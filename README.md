@@ -49,8 +49,18 @@ Assurez-vous que les fichiers clubs.json et competitions.json sont présents dan
 
 
 ### Routes principales
-/ : Page d'accueil (Index)  
-/showSummary : Affiche un résumé du club et des compétitions  
-/book/<competition>/<club> : Permet de réserver des places pour une compétition  
-/purchasePlaces : Confirme la réservation des places pour une compétition  
-/logout : Permet à l'utilisateur de se déconnecter
+
+- `/`  
+  Page d'accueil (Index)
+
+- `/showSummary`  
+Affiche un résumé des compétitions et des informations sur un club spécifique.
+
+- `/book/<competition>/<club>`  
+  Permet de réserver des places pour une compétition.
+
+- `/purchasePlaces`  
+  Confirme la réservation des places pour une compétition
+
+- `/logout`  
+  Permet à l'utilisateur de se déconnecter 
