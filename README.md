@@ -22,11 +22,11 @@ Ce projet est une application Flask pour la gestion des clubs sportifs et des co
 
 3. Activez l'environnement virtuel :
 
-    Sur MacOS/Linux :
+    Sur MacOS/Linux :  
         ```bash
         source venv/bin/activate
 
-    Sur Windows :
+    Sur Windows :  
         ```bash
         .\venv\Scripts\activate
 
