@@ -51,15 +51,19 @@ def purchasePlaces():
     # Vérifie que le nombre demandé est positif et logique
     if placesRequired <= 0:
         flash('Invalid number of places requested.')
-    # Vérifie la validité du nombre de places demandé
+
+    # Vérifie que le nombre de places demandé est <= au nombre de places disponible  # noqa: E501
     elif placesRequired > int(competition['numberOfPlaces']):
         flash('Not enough places available.')
-    # Vérifie que le nombre de places demandés ne dépasse pas la limite de 12
+
+    # Vérifie que le nombre de places demandés ne dépasse pas la limite
     elif placesRequired > MAX_PLACES:
         flash(f'You can not redeem more than {MAX_PLACES} places.')
+
     # Vérifie que le nombre de points est suffisant
     elif points < placesRequired:
         flash('Not enough points to book this number of places.')
+
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired  # noqa: E501
         club['points'] = points - placesRequired

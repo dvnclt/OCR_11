@@ -14,7 +14,7 @@ def client():
 
 # Mock des données fictives
 mocked_clubs = [
-    {"email": "test@success.com", "name": "Test Success", "points": 10},
+    {"name": "Test Success", "email": "test@success.com", "points": 10},
 ]
 
 
