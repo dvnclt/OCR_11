@@ -92,7 +92,9 @@ def test_not_enough_points(client):
 # Vérifie si la réservation a bien aboutie
 @patch('gudlift.routes.clubs', mocked_clubs)
 @patch('gudlift.routes.competitions', mocked_competitions)
-def test_successful_booking(client):
+@patch('gudlift.routes.saveClubs')
+@patch('gudlift.routes.saveCompetitions')
+def test_successful_booking(mock_save_clubs, mock_save_competitions, client):
     # Simule une réservation réussie
     response = client.post('/purchasePlaces', data={
         'competition': 'Summer Showdown',
