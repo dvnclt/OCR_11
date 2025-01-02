@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .utils import loadClubs, loadCompetitions
+from .utils import (loadClubs, loadCompetitions, saveClubs, saveCompetitions,
+                    MAX_PLACES)
 
 # Crée un blueprint pour les routes
 bp = Blueprint('main', __name__)
@@ -44,13 +45,31 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] ==
                    request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
+    points = int(club['points'])
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(
-        competition['numberOfPlaces']
-        ) - placesRequired
-    flash('Great-booking complete!')
-    return render_template('welcome.html', club=club,
-                           competitions=competitions)
+
+    # Vérifie que le nombre demandé est positif et logique
+    if placesRequired <= 0:
+        flash('Invalid number of places requested.')
+    # Vérifie la validité du nombre de places demandé
+    elif placesRequired > int(competition['numberOfPlaces']):
+        flash('Not enough places available.')
+    # Vérifie que le nombre de places demandés ne dépasse pas la limite de 12
+    elif placesRequired > MAX_PLACES:
+        flash(f'You can not redeem more than {MAX_PLACES} places.')
+    # Vérifie que le nombre de points est suffisant
+    elif points < placesRequired:
+        flash('Not enough points to book this number of places.')
+    else:
+        competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired  # noqa: E501
+        club['points'] = points - placesRequired
+        flash('Great-booking complete !')
+
+        saveClubs(clubs)
+        saveCompetitions(competitions)
+
+    return render_template(
+        'welcome.html', club=club, competitions=competitions)
 
 
 # TODO: Add route for points display
