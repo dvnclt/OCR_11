@@ -35,11 +35,16 @@ mocked_competitions = [
 
 
 # Vérifie l'impossibilité de réserver pour une compétition passée
-@patch("gudlift.routes.competitions")
-@patch("gudlift.routes.clubs")
-def test_booking_past_competition(mock_clubs, mock_competitions, client):
-    mock_clubs.return_value = mocked_clubs
-    mock_competitions.return_value = mocked_competitions
-
+@patch("gudlift.routes.clubs", mocked_clubs)
+@patch("gudlift.routes.competitions", mocked_competitions)
+def test_booking_past_competition(client):
     response = client.get('/book/Past%20Competition/Powerhouse%20Gym')
-    assert b'Past Competition' in response.data
+    assert b'This competition has already ended.' in response.data
+
+
+# Vérifie la possibilité de réserver pour une compétition future
+@patch("gudlift.routes.clubs", mocked_clubs)
+@patch("gudlift.routes.competitions", mocked_competitions)
+def test_booking_future_competition(client):
+    response = client.get('/book/Future%20Competition/Powerhouse%20Gym')
+    assert b'How many places?' in response.data
