@@ -28,7 +28,7 @@ mocked_competitions = [
     },
     {
         "name": "Future Competition",
-        "date": "2025-01-10 14:00:00",
+        "date": "2050-01-10 14:00:00",
         "numberOfPlaces": "20"
     }
 ]
