@@ -101,4 +101,4 @@ def test_successful_booking(mock_save_clubs, mock_save_competitions, client):
         'club': 'Powerhouse Gym',
         'places': '5'
     })
-    assert b'Great-booking complete !' in response.data
+    assert b'Great! You have successfully booked' in response.data

@@ -89,7 +89,7 @@ def purchasePlaces():
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired  # noqa: E501
         club['points'] = points - placesRequired
-        flash('Great-booking complete !')
+        flash(f'Great! You have successfully booked {placesRequired} place(s).')  # noqa: E501
 
         saveClubs(clubs)
         saveCompetitions(competitions)
