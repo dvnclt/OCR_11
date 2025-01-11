@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .utils import (loadClubs, loadCompetitions, saveClubs, saveCompetitions,
                     MAX_PLACES)
+from datetime import datetime
 
 # Crée un blueprint pour les routes
 bp = Blueprint('main', __name__)
@@ -23,21 +24,42 @@ def showSummary():
         flash("Sorry, this email was not found.", "error")
         return redirect(url_for('main.index'))
 
+    # Vérifie et ajoute l'attribut is_past pour chaque compétition
+    for competition in competitions:
+        competition_date = datetime.strptime(competition['date'],
+                                             "%Y-%m-%d %H:%M:%S")
+        competition['is_past'] = competition_date < datetime.now()
+
     return render_template('welcome.html', club=club,
                            competitions=competitions)
 
 
 @bp.route('/book/<competition>/<club>')
 def book(competition, club):
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
-        return render_template('booking.html', club=foundClub,
-                               competition=foundCompetition)
-    else:
-        flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club,
+    # Recherche la compétition et le club correspondants
+    foundClub = next((c for c in clubs if c['name'] == club), None)
+    foundCompetition = next((c for c in competitions if c['name'] ==
+                             competition), None)
+
+    if not foundClub or not foundCompetition:
+        flash("Something went wrong - please try again.", "error")
+        return render_template('welcome.html', club=None,
                                competitions=competitions)
+
+    # Vérifie si la compétition donnée est terminée
+    competition_date = datetime.strptime(foundCompetition['date'],
+                                         "%Y-%m-%d %H:%M:%S")
+    foundCompetition['is_past'] = competition_date < datetime.now()
+
+    # Si la compétition est passée, affiche un message d'erreur
+    if foundCompetition['is_past']:
+        flash("This competition has already ended.", "error")
+        return render_template('welcome.html', club=foundClub,
+                               competitions=competitions)
+
+    # Si non, permet d'accéder à la réservation
+    return render_template('booking.html', club=foundClub,
+                           competition=foundCompetition)
 
 
 @bp.route('/purchasePlaces', methods=['POST'])
@@ -76,7 +98,9 @@ def purchasePlaces():
         'welcome.html', club=club, competitions=competitions)
 
 
-# TODO: Add route for points display
+@bp.route('/pointsBoard')
+def pointsBoard():
+    return render_template('points_board.html', clubs=clubs)
 
 
 @bp.route('/logout')

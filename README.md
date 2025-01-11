@@ -64,5 +64,9 @@ Affiche un résumé des compétitions et des informations sur un club spécifiqu
 - `/purchasePlaces`  
   Confirme la réservation des places pour une compétition
 
+- `/pointsBoard`  
+Permet à l'utilisateur (connecté ou non) d'avoir accès à la liste des clubs
+et de leur nombre de points
+
 - `/logout`  
   Permet à l'utilisateur de se déconnecter 
